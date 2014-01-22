@@ -19,7 +19,7 @@ class { '::cron': }
 Log both start and end of cronjobs
 ```puppet
 class { '::cron':
-  $extra_opts => '-L 2'
+  extra_opts => '-L 2'
 }
 ```
 
@@ -32,7 +32,7 @@ the cron class
 
 ```puppet
 class { '::cron':
-  $purge_dot_d => true,
+  purge_dot_d => true,
 }
 ```
 
