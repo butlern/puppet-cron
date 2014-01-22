@@ -1,0 +1,6 @@
+<%
+  opts = []
+  opts << '-l' if @lsbnames
+  opts << @extra_opts if @extra_opts
+-%>
+exec cron <%= opts.join(' ') %>

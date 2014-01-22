@@ -1,0 +1,21 @@
+##### File managed by puppet! ######
+
+<%
+if @environment and not @environment.empty? -%>
+<%= '# Environment' %>
+<%
+  @environment.each do |env|
+    if env.match(/\S+=\S+/) -%>
+<%= env %>
+<%
+    else -%>
+# Invalid Environment Variable = <%= env %>
+<%
+    end
+  end
+end
+
+if @comment and not @comment.empty? -%>
+# <%= @comment %>
+<% end -%>
+<%= @minute %> <%= @hour %> <%= @day %> <%= @month %> <%= @weekday %> <%= @user %> <%= @command %>
