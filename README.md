@@ -2,6 +2,8 @@
 
 Puppet module for cron.
 
+[![Build Status](https://travis-ci.org/butlern/puppet-cron.png)](https://travis-ci.org/butlern/puppet-cron)
+
 ## Example usage
 
 Include with default parameters:
@@ -19,6 +21,7 @@ Log both start and end of cronjobs
 class { '::cron':
   $extra_opts => '-L 2'
 }
+```
 
 ### Cron Jobs
 
