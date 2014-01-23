@@ -1,11 +1,46 @@
 # == Class: cron
 #
-# Full description of class cron here.
+# The cron class manages the cron package, service and configuration.
 #
 # === Parameters
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it default to.
+# [*package_name*]
+#   The name of the package. Default is 'cron'.
+#
+# [*package_ensure*]
+#   The state of the package, 'absent', 'installed'. Can also specify the
+#   package version, e.g. '1.2.3-1' to pin a version. Default is 'present'.
+#
+# [*service_name*]
+#   The name of the cron service. Default is 'cron'.
+#
+# [*service_ensure*]
+#   Whether the service is 'running' or 'stopped'. Default is 'running'.
+#
+# [*service_manage*]
+#   Boolean. Whether to manage the service or not. Default is true.
+#
+# [*dot_dir*]
+#   The cron.d directory path. For placing crontab files for cron::job.
+#
+# [*purge_dot_dir*]
+#   Boolean. Whether we purge unmanaged crontab files in cron.d. Useful if you
+#   want to convenience of not having to 'ensure => absent' on cron::job
+#   resources before removing them from your manifests. With this enabled, you
+#   can just remove them from your manifest and they will be automatically
+#   purged from the cron.d directory. DANGER! This will purged ALL unmanaged
+#   cronjob entries in cron.d, even ones installed outside of puppet by
+#   packages. BEWARE. Default is false.
+#
+# [*override_file*]
+#   The path to the cron upstart service override file. Default to
+#   '/etc/init/cron.override'.
+#
+# [*lsbnames*]
+#   Boolean. Whether to enable LSB compliant names for cron.d files.
+#
+# [*extra_opts*]
+#   Extra cron options. For more info see cron(8). Default is '-L 1'.
 #
 class cron (
   $package_name = hiera('cron::package_name', $cron::params::package_name),
@@ -24,7 +59,7 @@ class cron (
 ) inherits cron::params {
 
   # validate parameters here
-  validate_bool($lsbnames)
+  validate_bool($service_manage, $purge_dot_dir, $lsbnames)
   validate_string($extra_opts)
 
   anchor { 'cron::begin': } ->
