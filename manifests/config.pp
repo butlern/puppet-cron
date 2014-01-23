@@ -24,10 +24,9 @@ class cron::config {
     purge   => $::cron::purge_dot_dir,
   }
 
+  # Keep placeholder file so dpkg doesn't remove the directory if purge_dot_dir
+  # is true.
   file { "${::cron::dot_dir}/.placeholder":
-    content => '# DO NOT EDIT OR REMOVE
-This file is a simple placeholder to keep dpkg from removing this directory
-',
   }
 
   # Resource ordering
