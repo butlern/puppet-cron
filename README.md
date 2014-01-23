@@ -32,12 +32,12 @@ the cron class
 
 ```puppet
 class { '::cron':
-  purge_dot_d => true,
+  purge_dot_dir => true,
 }
 ```
 
 *Please note that this is destructive to existing unmanaged cronjobs in
-/etc/cron.d!*
+/etc/cron.d! See Below.*
 
 Example cronjob
 ```puppet
@@ -47,6 +47,25 @@ cron::job { 'disk usage':
   hour => '2',
   environment => [ 'MAILTO=admin@example.com' ]
   comment => "Send disk usage stats every hour"
+}
+```
+
+### Purging /etc/cron.d
+
+If you enable purging of files in /etc/cron.d but you don't want puppet to
+purge cronjobs installed by packages. It is enough that somewhere in your
+manifest, you specify a file resource for the cronjob in question and ensure
+that it's present. You don't need to specify any other parameters to the
+file resource, nor do you need to manage its content.
+
+Example:
+
+```puppet
+include foo
+
+# Ensure foo's cronjob isn't purged
+file { "${::cron::dot_dir}/foojob" :
+  ensure => 'present',
 }
 ```
 
