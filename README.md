@@ -2,7 +2,7 @@
 
 Puppet module for cron.
 
-[![Build Status](https://travis-ci.org/butlern/puppet-cron.png)](https://travis-ci.org/butlern/puppet-cron)
+[![Build Status](https://travis-ci.org/chartbeat-labs/puppet-cron.png)](https://travis-ci.org/chartbeat-labs/puppet-cron)
 
 ## Example usage
 
