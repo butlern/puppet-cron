@@ -1,0 +1,17 @@
+{
+  "name": "chartbeat/cron",
+  "version": "1.0.0",
+  "author": "chartbeat",
+  "summary": "Module to manage cronjobs",
+  "license": "MIT",
+  "source": "https://github.com/chartbeat-labs/puppet-cron",
+  "project_page": "https://github.com/chartbeat-labs/puppet-cron",
+  "issues_url": "https://github.com/chartbeat-labs/puppet-cron/issues",
+  "description": "Cron module for Puppet",
+  "dependencies": [
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 3.0.0"
+    }
+  ]
+}
