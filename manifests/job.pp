@@ -45,22 +45,18 @@
 # }
 #
 define cron::job (
-  $command,
-  $ensure      = 'present',
-  $environment = [],
-  $comment     = '',
-  $user        = 'root',
-  $minute      = '*',
-  $hour        = '*',
-  $day         = '*',
-  $month       = '*',
-  $weekday     = '*',
+  String $command,
+  Enum['present', 'absent'] $ensure = 'present',
+  Array[String] $environment        = [],
+  String $comment                   = '',
+  String $user                      = 'root',
+  String $minute                    = '*',
+  String $hour                      = '*',
+  String $day                       = '*',
+  String $month                     = '*',
+  String $weekday                   = '*',
 ) {
   include cron
-
-  if ! ($ensure in [ 'present', 'absent' ]) {
-    fail("Invalid value ${ensure} for ensure")
-  }
 
   file { "${::cron::dot_dir}/${name}":
     ensure  => $ensure,

@@ -44,6 +44,14 @@ describe 'cron::job', :type => :define do
 
   context 'when installing a cronjob with no parameters' do
     let(:params) {{ }}
-    it { expect { should raise_error(Puppet::Error, /Must pass command/) } }
+    it { should raise_error(Puppet::ParseError) }
+  end
+
+  context 'when installing a cronjob with invalid ensure' do
+    let(:params) {{
+      :command => 'echo foo',
+      :ensure  => 'disabled',
+    }}
+    it { should raise_error(Puppet::ParseError) }
   end
 end

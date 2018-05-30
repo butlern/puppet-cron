@@ -1,3 +1,10 @@
+2018-05-30 Release 2.0.0
+- Remove stdlib dependency
+- Remove support for puppet 3
+- Add DataTypes to parameters
+- Various deprecation fixes for tests
+- Update test matrix to test puppet4/5 with correct ruby versions
+
 2015-03-09 Release 1.0.0
 - Add groups to the Gemfile
 - Remove rspec-system-puppet in favor of the puppetlabs supported beaker

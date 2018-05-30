@@ -43,32 +43,23 @@
 #   Extra cron options. For more info see cron(8). Default is '-L 1'.
 #
 class cron (
-  $package_name = hiera('cron::package_name', $cron::params::package_name),
-  $package_ensure = hiera('cron::package_ensure',
-                          $cron::params::package_ensure),
-  $service_name = hiera('cron::service_name', $cron::params::service_name),
-  $service_ensure = hiera('cron::service_ensure',
-                          $cron::params::service_ensure),
-  $service_manage = hiera('cron::service_manage',
-                          $cron::params::service_manage),
-  $dot_dir = hiera('cron::dot_dir', $cron::params::dot_dir),
-  $purge_dot_dir = hiera('cron::purge_dot_dir', $cron::params::purge_dot_dir),
-  $override_file = hiera('cron::override_file', $cron::params::override_file),
-  $lsbnames = hiera('cron::lsbnames', $cron::params::lsbnames),
-  $extra_opts = hiera('cron::extra_opts', $cron::params::extra_opts),
+  String $package_name = $cron::params::package_name,
+  String $package_ensure = $cron::params::package_ensure,
+  String $service_name = $cron::params::service_name,
+  String $service_ensure = $cron::params::service_ensure,
+  Boolean $service_manage = $cron::params::service_manage,
+  String $dot_dir = $cron::params::dot_dir,
+  Boolean $purge_dot_dir = $cron::params::purge_dot_dir,
+  String $override_file = $cron::params::override_file,
+  Boolean $lsbnames = $cron::params::lsbnames,
+  String $extra_opts = $cron::params::extra_opts,
 ) inherits cron::params {
 
-  # validate parameters here
-  validate_bool($service_manage, $purge_dot_dir, $lsbnames)
-  validate_string($extra_opts)
-
-  anchor { 'cron::begin': } ->
   class { 'cron::install': } ->
-  class { 'cron::config': }
-  class { 'cron::service': } ->
-  anchor { 'cron::end': }
+  class { 'cron::config': } ->
+  class { 'cron::service': }
 
-  Anchor['cron::begin']  ~> Class['cron::service']
-  Class['cron::install'] ~> Class['cron::service']
-  Class['cron::config']  ~> Class['cron::service']
+  contain 'cron::install'
+  contain 'cron::config'
+  contain 'cron::service'
 }
