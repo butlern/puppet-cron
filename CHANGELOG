@@ -1,3 +1,6 @@
+2018-06-11 Release 2.1.0
+- Add systemd override functionality
+
 2018-05-30 Release 2.0.0
 - Remove stdlib dependency
 - Remove support for puppet 3

@@ -1,0 +1,8 @@
+<%
+  opts = []
+  opts << '-l' if @lsbnames
+  opts << @extra_opts if @extra_opts
+-%>
+[Service]
+ExecStart=
+ExecStart=/usr/sbin/cron -f <%= opts.join(' ') %>

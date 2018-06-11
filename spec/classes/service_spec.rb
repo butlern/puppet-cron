@@ -3,7 +3,9 @@ require 'spec_helper'
 describe 'cron', :type => :class do
   # Default facts used for contexts
   let(:facts) {{
-    :osfamily => 'Debian'
+    :osfamily => 'Debian',
+    :operatingsystem => 'Ubuntu',
+    :operatingsystemrelease => '14.04'
   }}
 
   context 'with no parameters' do
