@@ -1,6 +1,6 @@
 {
   "name": "chartbeat-cron",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "author": "chartbeat",
   "summary": "Module to manage cronjobs",
   "license": "MIT",
