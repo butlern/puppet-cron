@@ -16,7 +16,7 @@ class cron::service {
 
   if ($::cron::init_type == 'systemd') {
     exec { 'cron-systemd-reload':
-      command     => '/usr/bin/systemctl daemon-reload',
+      command     => '/bin/systemctl daemon-reload',
       refreshonly => true,
     }
   }
