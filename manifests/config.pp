@@ -14,8 +14,16 @@ class cron::config {
   $lsbnames = $::cron::lsbnames
   $extra_opts = $::cron::extra_opts
 
-  file { $::cron::override_file:
-    content => template('cron/upstart/override.erb')
+  if ($::cron::init_type == 'systemd') {
+    $template_file = 'cron/systemd/override.erb'
+    file { $::cron::override_file:
+      content => template('cron/systemd/override.erb'),
+      notify  => Exec['cron-systemd-reload'],
+    }
+  } else {
+    file { $::cron::override_file:
+      content => template('cron/upstart/override.erb')
+    }
   }
 
   file { $::cron::dot_dir:

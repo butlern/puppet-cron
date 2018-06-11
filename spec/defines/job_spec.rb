@@ -6,7 +6,9 @@ describe 'cron::job', :type => :define do
   end
 
   let(:facts) {{
-    :osfamily => 'Debian'
+    :osfamily => 'Debian',
+    :operatingsystem => 'Ubuntu',
+    :operatingsystemrelease => '14.04',
   }}
 
   context 'when installing a cronjob' do

@@ -3,14 +3,12 @@ require 'spec_helper'
 describe 'cron', :type => :class do
   # Default facts used for contexts
   let(:facts) {{
-    :osfamily => 'Debian'
+    :osfamily => 'Debian',
+    :operatingsystem => 'Ubuntu',
+    :operatingsystemrelease => '14.04'
   }}
 
   describe 'cron::install class on Debian' do
-    let(:facts) {{
-      :osfamily => 'Debian',
-    }}
-
     it { should contain_package('cron') }
   end
 

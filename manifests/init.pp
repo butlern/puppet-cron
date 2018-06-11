@@ -32,6 +32,10 @@
 #   cronjob entries in cron.d, even ones installed outside of puppet by
 #   packages. BEWARE. Default is false.
 #
+# [*init_type*]
+#   Enum. Either upstart or systemd. Used to determine how to properly override
+#   the cron extra_opts.
+#
 # [*override_file*]
 #   The path to the cron upstart service override file. Default to
 #   '/etc/init/cron.override'.
@@ -51,6 +55,7 @@ class cron (
   String $dot_dir = $cron::params::dot_dir,
   Boolean $purge_dot_dir = $cron::params::purge_dot_dir,
   String $override_file = $cron::params::override_file,
+  String $init_type = $cron::params::init_type,
   Boolean $lsbnames = $cron::params::lsbnames,
   String $extra_opts = $cron::params::extra_opts,
 ) inherits cron::params {
