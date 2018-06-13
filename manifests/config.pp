@@ -16,6 +16,10 @@ class cron::config {
 
   if ($::cron::init_type == 'systemd') {
     $template_file = 'cron/systemd/override.erb'
+    file { '/etc/systemd/system/cron.service.d':
+      ensure => 'directory',
+      before => File[$::cron::override_file],
+    }
     file { $::cron::override_file:
       content => template('cron/systemd/override.erb'),
       notify  => Exec['cron-systemd-reload'],
